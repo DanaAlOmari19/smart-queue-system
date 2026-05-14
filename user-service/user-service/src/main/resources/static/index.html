@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Queue System</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #1f4e79;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        .header p {
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        .container {
+            width: 90%;
+            margin: 30px auto;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.12);
+            text-align: center;
+        }
+
+        .card h3 {
+            color: #1f4e79;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #555;
+            font-size: 14px;
+            min-height: 40px;
+        }
+
+        button {
+            background-color: #1f4e79;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #163a59;
+        }
+
+        .result-box {
+            background-color: white;
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.12);
+        }
+
+        .result-box h2 {
+            color: #1f4e79;
+        }
+
+        pre {
+            background-color: #eeeeee;
+            padding: 15px;
+            border-radius: 8px;
+            min-height: 160px;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Smart Queue System</h1>
+    <p>Advanced Software Engineering Running Project</p>
+</div>
+
+<div class="container">
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>User Service</h3>
+            <p>Manage users and user information.</p>
+            <button onclick="loadData('/api/users')">View Users</button>
+        </div>
+
+        <div class="card">
+            <h3>Booking Service</h3>
+            <p>Manage queue bookings and booking status.</p>
+            <button onclick="loadData('/api/bookings')">View Bookings</button>
+        </div>
+
+        <div class="card">
+            <h3>Queue Service</h3>
+            <p>Manage queue numbers and waiting status.</p>
+            <button onclick="loadData('/api/queue')">View Queue</button>
+        </div>
+
+        <div class="card">
+            <h3>Notification Service</h3>
+            <p>Send notifications to users before their turn.</p>
+            <button onclick="loadData('/api/notifications')">View Notifications</button>
+        </div>
+
+        <div class="card">
+            <h3>Location Service</h3>
+            <p>Manage clinics, banks, and service locations.</p>
+            <button onclick="loadData('/api/locations')">View Locations</button>
+        </div>
+
+        <div class="card">
+            <h3>Booking Workflow</h3>
+            <p>Run the full booking workflow process.</p>
+            <button onclick="loadData('/api/workflow/book')">Run Workflow</button>
+        </div>
+
+    </div>
+
+    <div class="result-box">
+        <h2>API Result</h2>
+        <pre id="result">Click any button to show the result here...</pre>
+    </div>
+
+</div>
+
+<div class="footer">
+    <p>Smart Queue System - Spring Boot Microservices Demo</p>
+</div>
+
+<script>
+    function loadData(url) {
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result").textContent =
+                    JSON.stringify(data, null, 4);
+            })
+            .catch(error => {
+                document.getElementById("result").textContent =
+                    "Error: " + error;
+            });
+    }
+</script>
+
+</body>
+</html>
